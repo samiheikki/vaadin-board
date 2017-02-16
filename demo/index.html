@@ -15,14 +15,15 @@
     <div class="vertical-section-container centered">
       <h3>Basic vaadin-board demo</h3>
       <vaadin-board>
-        <vaadin-board-row>
+        <vaadin-board-row style="margin-bottom:8px">
           <div class="top a">top A</div>
           <div class="top b">top B</div>
           <div class="top c">top C</div>
           <div class="top d">top D</div>
         </vaadin-board-row>
-        <vaadin-board-row>
-          <div class="mid">mid</div>
+        <vaadin-board-row class="middle" style="margin-bottom:8px">
+          <div class="mid" board-cols="2">mid</div>
+          <div class="mid" board-cols="2">mid</div>
         </vaadin-board-row>
         <vaadin-board-row>
           <div class="low a">low A</div>

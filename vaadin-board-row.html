@@ -96,7 +96,7 @@
           }
         }
         flexBasis = flexBasis > 100 ? 100 : flexBasis;
-        return flexBasis + '%';
+        return flexBasis;
       }
 
       _reportError() {
@@ -180,14 +180,31 @@
 
           const filteredNodes = nodes.filter(node => node.nodeType !== node.TEXT_NODE);
 
+
           const boardCols = this._parseBoardCols(filteredNodes);
+
           this._removeExtraNodesFromDOM(boardCols, filteredNodes).forEach((e,i) => {
+              this._addMixins(e, width);
+              let marginWidth =0;
+              const style = e.currentStyle || window.getComputedStyle(e);
+              let marginLeft = parseInt(style.marginLeft, 10);
+              marginWidth += marginLeft;
+              let marginRight = parseInt(style.marginRight, 10);
+              marginWidth += marginRight;
+
+
+
+
               let newFlexBasis = this._calculateFlexBasis(boardCols[i], width, filteredNodes.length);
+              if(marginWidth != 0) {
+                let foo =100 * marginWidth / this.getBoundingClientRect().width;
+                newFlexBasis = newFlexBasis - foo;
+              }
               if(forceResize || !this._oldFlexBasis[i] || this._oldFlexBasis[i] != newFlexBasis) {
                   this._oldFlexBasis[i] = newFlexBasis
-                  e.style.flexBasis = newFlexBasis;
+                   e.style.flexBasis = newFlexBasis + '%';
               }
-              this._addMixins(e, width);
+
           });
           this._oldWidth = width;
         }
