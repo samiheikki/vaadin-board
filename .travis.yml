@@ -8,6 +8,7 @@ install:
 - bower install
 
 before_script:
+- npm install -g bower polymer-cli@next
 - gulp lint
 
 script:
